@@ -17,6 +17,9 @@
 		</script>{% endif %}
 		<link rel="icon" href="/favicon.ico">
 		<meta charset="UTF-8">
+		{% if site.themeColor %}
+		<meta name="theme-color" content="{{ site.themeColor }}" />
+		{% endif %}
 		<title>{% if page.url == "/" %}{{ site.title | xml_escape }}{% else %}{{ page.title | xml_escape }} – {{ site.title | xml_escape }}{% endif %}</title>
 		<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ page.excerpt | xml_escape }}{% endif %}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
