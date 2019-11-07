@@ -2,8 +2,9 @@
 ---
 :root {
 	--primary-color: #40e2d0;
-	--background-color: #9ee6dd;
-	--section-background-color: #71e2d1;
+	--background-color: #aefff6;
+	// --section-background-color: #71e2d1;
+	--section-background-color: var(--primary-color);
 	--input-background-color: #beeee9;
 	--text-color: #222;
 }
