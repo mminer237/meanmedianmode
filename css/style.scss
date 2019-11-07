@@ -1,11 +1,12 @@
 ---
 ---
 :root {
-	--primary-color: #40e2d0;
-	--background-color: #aefff6;
+	--primary-color: #40dae0;
+	--background-color: #aef6ff;
 	// --section-background-color: #71e2d1;
 	--section-background-color: var(--primary-color);
-	--input-background-color: #beeee9;
+	--input-background-color: #7eeee9;
+	--input-color: #30b0d0;
 	--text-color: #222;
 }
 body {
@@ -55,6 +56,7 @@ h2, summary {
 }
 textarea {
 	background-color: var(--input-background-color);
+	color: var(--input-color);
 	font-family: 'Lato', sans-serif;
 	font-size: 24px;
 	width: 100%;
