@@ -5,11 +5,8 @@ url: https://meanmedianmode.netlify.com
 # googleAdClient: ca-pub-5576042369154755
 themeColor: "#40e2d0"
 
-# googleFonts:
-#   - Lato:400,400i,900
-#   - Old+Standard+TT:400,400i,700
-#   - IBM+Plex+Serif:500,500i
-
+googleFonts:
+  - Raleway
 defaults:
   -
     scope:
