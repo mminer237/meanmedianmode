@@ -38,6 +38,12 @@ section, article, details {
 	margin: 15px auto;
 	padding: 10px;
 }
+.comparison-container {
+	display: flex;
+}
+.result-container {
+	display: flex;
+}
 @media (prefers-color-scheme: dark) {
 	:root {
 		--text-color: #EEE;
