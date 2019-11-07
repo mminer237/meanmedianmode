@@ -7,7 +7,7 @@ themeColor: "#40e2d0"
 
 googleFonts:
   - Raleway
-  - Montserrat
+  - Lato
 defaults:
   -
     scope:
