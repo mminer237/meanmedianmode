@@ -4,6 +4,7 @@
 	--primary-color: #40e2d0;
 	--background-color: #9ee6dd;
 	--section-background-color: #71e2d1;
+	--input-background-color: #beeee9;
 	--text-color: #222;
 }
 body {
@@ -42,6 +43,12 @@ section, article, details {
 	max-width: 700px;
 	margin: 15px auto;
 	padding: 10px;
+}
+textarea {
+	background-color: var(--input-background-color);
+	font-family: sans-serif;
+	font-size: 24px;
+	width: 100%;
 }
 .comparison-container {
 	display: flex;
