@@ -44,6 +44,9 @@ section, article, details {
 	margin: 15px auto;
 	padding: 10px;
 }
+h2, summary {
+	margin: 0 0 15px 0;
+}
 textarea {
 	background-color: var(--input-background-color);
 	font-family: sans-serif;
