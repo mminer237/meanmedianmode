@@ -28,7 +28,7 @@
 		<link href="https://fonts.googleapis.com/css?family={{ font }}&display=swap" rel="stylesheet">
 		{% endfor %}
 		{% for script in layout.scripts %}
-		<script src="{{ script }}"></script>
+		<script src="{{ script }}" defer></script>
 		{% endfor %}
 	</head>
 	<body>
