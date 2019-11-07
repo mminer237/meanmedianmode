@@ -1,0 +1,23 @@
+title: Mean, Median, Mode
+url: https://meanmedianmode.netlify.com
+# url: https://meanmedianmode.xyz
+# tagManagerCode: GTM-W53GM9S
+# googleAdClient: ca-pub-5576042369154755
+
+# googleFonts:
+#   - Lato:400,400i,900
+#   - Old+Standard+TT:400,400i,700
+#   - IBM+Plex+Serif:500,500i
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-sitemap
