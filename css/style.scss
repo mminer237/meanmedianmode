@@ -4,7 +4,7 @@
 	--primary-color: #40e2d0;
 	--background-color: #9ee6dd;
 	--section-background-color: #71e2d1;
-	--text-color: black;
+	--text-color: #222;
 }
 body {
 	background-color: var(--background-color);
@@ -17,13 +17,18 @@ body {
 header {
 	background-color: var(--primary-color);
 	padding: 10px;
+	a {
+		text-decoration: none;
+	}
 	h1 {
+		color: var(--text-color);
+		display: inline-block;
 		margin: 0;
-		padding: 20px;
+		padding: 10px;
 	}
 }
 h1 {
-	font-size: 60px;
+	font-size: 50px;
 }
 header, footer {
 	text-align: center;
@@ -45,6 +50,10 @@ section, article, details {
 .result-container {
 	display: flex;
 	width: 100%;
+}
+footer {
+	background-color: var(--primary-color);
+	padding: 15px;
 }
 @media (prefers-color-scheme: dark) {
 	:root {
