@@ -4,6 +4,7 @@ const dataBox = document.getElementById("data-box");
 const meanContainer = document.getElementById("mean");
 const medianContainer = document.getElementById("median");
 const modeContainer = document.getElementById("mode");
+const modePluralizer = document.getElementById("mode-pluralizer");
 dataBox.addEventListener("input", updateResults);
 updateResults();
 
@@ -15,7 +16,12 @@ function updateResults() {
 	}
 	fill(meanContainer, numbersList, mean(numbers));
 	fill(medianContainer, numbersList, median(numbers));
-	fill(modeContainer, numbersList, mode(numbers).join(" & "));
+	const modeResult = mode(numbers);
+	if (isNaN(modeResult))
+		modePluralizer.style.display = "inline";
+	else
+		modePluralizer.style.display = "none";
+	fill(modeContainer, numbersList, modeResult.join(" & "));
 }
 
 function fill(resultContainer, numbersList, result) {
