@@ -9,7 +9,7 @@ dataBox.addEventListener("input", updateResults);
 updateResults();
 
 function updateResults() {
-	const numbers = dataBox.value.split(",").map(x => x.trim() * 1).sort((a, b) => a - b);
+	const numbers = dataBox.value.split(",").map(x => x.trim()).filter(x => x.length > 0 && !isNaN(x)).map(x => x * 1).sort((a, b) => a - b);
 	let numbersList = "";
 	for (let i = 0; i < numbers.length; i++) {
 		numbersList += `<div>${numbers[i]}</div>`;
