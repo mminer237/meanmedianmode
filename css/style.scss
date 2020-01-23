@@ -65,11 +65,32 @@ textarea {
 .comparison-container {
 	display: flex;
 	justify-content: space-around;
+	margin: 0 10px;
+	text-align: center;
 	width: 100%;
+	> div {
+		flex: 1 1 0;
+	}
 }
 .result-container {
 	display: flex;
 	width: 100%;
+	> div {
+		flex: 1 1 0;
+	}
+}
+.list {
+	font-size: 135%;
+	div {
+		max-width: 130px;
+		overflow: hidden;
+		padding: 1px;
+		text-overflow: ellipsis;
+	}
+}
+.answer {
+	font-size: 200%;
+	padding-top: 25px;
 }
 footer {
 	background-color: var(--primary-color);
