@@ -29,7 +29,11 @@ function updateResults() {
 }
 
 function round(number) {
-	return Math.round(number * 100) / 100;
+	let roundedNumber = Math.round(number * 100) / 100;
+	if (roundedNumber == number)
+		return roundedNumber;
+	else
+		return '~' + roundedNumber;
 }
 
 function fill(resultContainer, numbersList, result, rawResult = result) {
