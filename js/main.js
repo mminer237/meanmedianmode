@@ -39,7 +39,7 @@ function mean(numbers) {
 
 function median(numbers) {
 	if (numbers.length % 2 != 0)
-		return Math.floor(numbers.length / 2);
+		return numbers[Math.floor(numbers.length / 2)];
 	else {
 		const upperMiddle = numbers.length / 2;
 		return (numbers[upperMiddle - 1] + numbers[upperMiddle]) / 2;
