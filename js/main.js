@@ -16,22 +16,30 @@ function updateResults() {
 	}
 	fill(meanContainer, numbersList, mean(numbers));
 	fill(medianContainer, numbersList, median(numbers));
-	const modeResult = mode(numbers);
-	if (isNaN(modeResult))
+	let modeResult = mode(numbers);
+	if (isNaN(modeResult)) {
 		modePluralizer.style.display = "inline";
+		for (let i = 0; i < modeResult.length; i++) {
+			modeResult[i] = round(modeResult[i]);
+		}
+	}
 	else
 		modePluralizer.style.display = "none";
-	fill(modeContainer, numbersList, modeResult.join(" & "));
+	fill(modeContainer, numbersList, modeResult.join(" & "), modeResult);
 }
 
-function fill(resultContainer, numbersList, result) {
+function round(number) {
+	return Math.round(number * 100) / 100;
+}
+
+function fill(resultContainer, numbersList, result, rawResult = result) {
 	resultContainer.querySelector(".list").innerHTML = numbersList;
 	if (!isNaN(result))
-		resultContainer.querySelector(".answer").innerText = Math.round(result * 100) / 100;
+		resultContainer.querySelector(".answer").innerText = round(result);
 	else
 		resultContainer.querySelector(".answer").innerText = result;
 	
-	visualize(resultContainer);
+	visualize(resultContainer, rawResult);
 }
 
 function mean(numbers) {
@@ -70,9 +78,10 @@ function mode(numbers) {
 	return mostIndexes;
 }
 
-function visualize(resultContainer) {
+function visualize(resultContainer, results) {
 	const listElements = Array.from(resultContainer.querySelectorAll(".list>div"));
-	const results = resultContainer.querySelector(".answer").innerText.split(" & ");
+	if (!isNaN(results))
+		results = [results];
 
 	for (let resultIndex = 0; resultIndex < results.length; resultIndex++) {
 		const result = results[resultIndex];
