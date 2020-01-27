@@ -2,6 +2,8 @@
 ---
 :root {
 	--primary-color: #40dae0;
+	--highlighted-color: #7eeee9;
+	// --highlighted-color: #00ffe7;
 	--background-color: #aef6ff;
 	// --section-background-color: #71e2d1;
 	--section-background-color: var(--primary-color);
@@ -65,11 +67,13 @@ textarea {
 .comparison-container {
 	display: flex;
 	justify-content: space-around;
-	margin: 0 10px;
+	margin: 0 1px;
 	text-align: center;
-	width: 100%;
 	> div {
 		flex: 1 1 0;
+	}
+	> div:not(:first-child) {
+		border-left: var(--background-color) 2px solid;
 	}
 }
 #mode-pluralizer {
@@ -85,15 +89,19 @@ textarea {
 .list {
 	font-size: 135%;
 	div {
+		margin: 0 8px;
 		max-width: 130px;
 		overflow: hidden;
 		padding: 1px;
 		text-overflow: ellipsis;
 	}
 }
+.highlighted, .answer {
+	background-color: var(--highlighted-color);
+}
 .answer {
 	font-size: 200%;
-	padding-top: 25px;
+	margin: 25px 8px auto;
 }
 footer {
 	background-color: var(--primary-color);

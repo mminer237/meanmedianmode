@@ -30,6 +30,8 @@ function fill(resultContainer, numbersList, result) {
 		resultContainer.querySelector(".answer").innerText = Math.round(result * 100) / 100;
 	else
 		resultContainer.querySelector(".answer").innerText = result;
+	
+	visualize(resultContainer);
 }
 
 function mean(numbers) {
@@ -66,4 +68,23 @@ function mode(numbers) {
 		}
 	};
 	return mostIndexes;
+}
+
+function visualize(resultContainer) {
+	const listElements = Array.from(resultContainer.querySelectorAll(".list>div"));
+	const results = resultContainer.querySelector(".answer").innerText.split(" & ");
+
+	for (let resultIndex = 0; resultIndex < results.length; resultIndex++) {
+		const result = results[resultIndex];
+		for (let listIndex = 0; listIndex < listElements.length; listIndex++) {
+			const listNumber = listElements[listIndex].innerText;
+			if (result == listNumber) {
+				highlight(listElements[listIndex], resultContainer);
+			}
+		}
+	}
+}
+
+function highlight(element, resultContainer) {
+	element.classList.add("highlighted");
 }
