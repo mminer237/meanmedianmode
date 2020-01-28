@@ -162,7 +162,7 @@ function drawLineToPoint(resultContainer, x, y) {
 function drawLine(resultContainer, x1, y1, x2, y2) {
 	console.log([x1, y1, x2, y2]);
 	const color = "#7eeee9";
-	const lineWidth = 3;
+	const lineWidth = 2;
 
 	const canvas = resultContainer.querySelector('canvas');
 	const ctx = canvas.getContext('2d');
