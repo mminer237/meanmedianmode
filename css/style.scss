@@ -11,6 +11,9 @@
 	--input-color: #30b0d0;
 	--text-color: #222;
 }
+* {
+	position: relative;
+}
 body {
 	background-color: var(--background-color);
 	display: flex;
@@ -82,12 +85,18 @@ textarea {
 .result-container {
 	display: flex;
 	width: 100%;
+	canvas {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
 	> div {
 		flex: 1 1 0;
 	}
 }
 .list {
 	font-size: 135%;
+	position: unset;
 	div {
 		margin: 0 8px;
 		max-width: 110px;

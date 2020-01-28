@@ -87,17 +87,90 @@ function visualize(resultContainer, results) {
 	if (!isNaN(results))
 		results = [results];
 
+	resetCanvas(resultContainer.querySelector('canvas'));
 	for (let resultIndex = 0; resultIndex < results.length; resultIndex++) {
 		const result = results[resultIndex];
+		let bigger = true;
+		let exact = false;
+		let position = -1;
 		for (let listIndex = 0; listIndex < listElements.length; listIndex++) {
 			const listNumber = listElements[listIndex].innerText;
 			if (result == listNumber) {
+				exact = true;
 				highlight(listElements[listIndex], resultContainer);
 			}
+			else if (bigger && result > listNumber) {
+				bigger = false;
+				position = listIndex;
+			}
 		}
+		if (!exact)
+			drawLineAfterElement(resultContainer, position == -1 ? null : listElements[position]);
 	}
 }
 
 function highlight(element, resultContainer) {
 	element.classList.add("highlighted");
+	drawLineToElement(resultContainer, element);
+}
+
+function resetCanvas(canvas) {
+	canvas.height = canvas.offsetHeight;
+	canvas.width = canvas.offsetWidth;
+	canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawLineAfterElement(resultContainer, element) {
+	let y;
+	if (element) {
+		y = element.offsetTop + element.offsetHeight;
+	}
+	else {
+		element = resultContainer.querySelector(".list>div");
+		y = element.offsetTop;
+	}
+	/* Draw diagonal line */
+	drawLineToPoint(
+		resultContainer,
+		element.offsetLeft + element.offsetWidth,
+		y
+	);
+
+	/* Draw horizontal line */
+	drawLine(resultContainer, element.offsetLeft + element.offsetWidth, y, element.offsetLeft, y);
+}
+
+function drawLineToElement(resultContainer, element) {
+	drawLineToPoint(
+		resultContainer,
+		element.offsetLeft + element.offsetWidth,
+		element.offsetTop + element.offsetHeight / 2
+	);
+}
+
+function drawLineToPoint(resultContainer, x, y) {
+	const answerElement = resultContainer.querySelector(".answer");
+	drawLine(
+		resultContainer,
+		answerElement.offsetLeft + 1,
+		answerElement.offsetTop + answerElement.offsetHeight / 2,
+		x - 1,
+		y
+	);
+}
+
+function drawLine(resultContainer, x1, y1, x2, y2) {
+	console.log([x1, y1, x2, y2]);
+	const color = "#7eeee9";
+	const lineWidth = 3;
+
+	const canvas = resultContainer.querySelector('canvas');
+	const ctx = canvas.getContext('2d');
+
+	ctx.lineWidth = lineWidth;
+	ctx.strokeStyle = color;
+	ctx.beginPath();
+	ctx.moveTo(x1, y1);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
 }
