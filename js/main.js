@@ -99,7 +99,7 @@ function visualize(resultContainer, results) {
 				exact = true;
 				highlight(listElements[listIndex], resultContainer);
 			}
-			else if (bigger && result > listNumber) {
+			else if (bigger && listNumber > result) {
 				bigger = false;
 				position = listIndex;
 			}
