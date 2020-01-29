@@ -155,11 +155,12 @@ function drawLineToPoint(resultContainer, x, y) {
 		answerElement.offsetLeft + 1,
 		answerElement.offsetTop + answerElement.offsetHeight / 2,
 		x - 1,
-		y
+		y,
+		true
 	);
 }
 
-function drawLine(resultContainer, x1, y1, x2, y2) {
+function drawLine(resultContainer, x1, y1, x2, y2, bezier = false) {
 	const color = "#7eeee9";
 	const lineWidth = 2;
 
@@ -170,6 +171,17 @@ function drawLine(resultContainer, x1, y1, x2, y2) {
 	ctx.strokeStyle = color;
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
-	ctx.lineTo(x2, y2);
+	if (bezier) {
+		ctx.bezierCurveTo(
+			(x1 + x2) / 2,
+			y1,
+			(x1 + x2) / 2,
+			y2,
+			x2,
+			y2
+		);
+	}
+	else
+		ctx.lineTo(x2, y2);
 	ctx.stroke();
 }
