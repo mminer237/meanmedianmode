@@ -6,7 +6,7 @@ const medianContainer = document.getElementById("median");
 const modeContainer = document.getElementById("mode");
 const modePluralizer = document.getElementById("mode-pluralizer");
 dataBox.addEventListener("input", updateResults);
-updateResults();
+window.addEventListener("load", updateResults);
 
 function updateResults() {
 	const numbers = dataBox.value.split(",").map(x => x.trim()).filter(x => x.length > 0 && !isNaN(x)).map(x => x * 1).sort((a, b) => a - b);
