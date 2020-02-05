@@ -2,6 +2,8 @@
 ---
 :root {
 	--primary-color: #40dae0;
+	--dark-primary-color: #00585c;
+	--darkish-primary-color: #057f84;
 	--highlighted-color: #7eeee9;
 	// --highlighted-color: #00ffe7;
 	--background-color: #aef6ff;
@@ -67,6 +69,12 @@ textarea {
 	padding: 3px;
 	width: calc(100% - 6px);
 }
+a {
+	color: var(--dark-primary-color);
+}
+a:hover {
+	color: var(--darkish-primary-color);
+}
 .comparison-container {
 	display: flex;
 	justify-content: space-around;
@@ -82,7 +90,7 @@ textarea {
 #mode-pluralizer {
 	display: none;
 }
-a.about-link {
+.about-link {
 	position: absolute;
 	font-size: 60%;
 	margin: 3px 0 0 4px;
