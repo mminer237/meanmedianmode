@@ -19,6 +19,11 @@ defaults:
     values:
       layout: "default"
 
+collections:
+  pages:
+    output: true
+    permalink: /:path
+
 sass:
   style: compressed
 
