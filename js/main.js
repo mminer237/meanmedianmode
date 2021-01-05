@@ -101,7 +101,7 @@ function visualize(resultContainer, results) {
 			}
 			else if (bigger && listNumber > result) {
 				bigger = false;
-				position = listIndex;
+				position = listIndex - 1;
 			}
 		}
 		if (!exact)
