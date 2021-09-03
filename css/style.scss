@@ -1,6 +1,7 @@
 ---
 ---
 :root {
+	--primary-color: hsl(182, 72%, 65%);
 	--primary-color: #40dae0;
 	--dark-primary-color: #00585c;
 	--darkish-primary-color: #057f84;
@@ -42,6 +43,9 @@ h1, h2, h3, h4, h5, h6, summary {
 }
 h1 {
 	font-size: 50px;
+}
+h1:hover {
+	background-color: var(--highlighted-color);
 }
 header, footer {
 	text-align: center;
