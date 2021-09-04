@@ -1,7 +1,6 @@
 ---
 ---
 :root {
-	--primary-color: hsl(182, 72%, 65%);
 	--primary-color: #40dae0;
 	--dark-primary-color: #00585c;
 	--darkish-primary-color: #057f84;
@@ -141,12 +140,25 @@ mfrac {
 }
 footer {
 	background-color: var(--primary-color);
+	color: var(--text-color);
 	padding: 15px;
 }
 @media (prefers-color-scheme: dark) {
 	:root {
-		--text-color: #EEE;
+		--highlighted-color: var(--darkish-primary-color);
 		--background-color: #283840;
 		--section-background-color: #30404D;
+		--input-background-color: var(--dark-primary-color);
+		--input-color: #aef6ff;
+		--text-color: #EEE;
+	}
+	header, footer {
+		background-color: var(--dark-primary-color);
+	}
+	a {
+		color: var(--primary-color)
+	}
+	a:hover {
+		color: #aef6ff
 	}
 }
