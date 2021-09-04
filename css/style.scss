@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, summary {
 h1 {
 	font-size: 50px;
 }
-h1:hover {
+header>a:hover {
 	background-color: var(--highlighted-color);
 }
 header, footer {
