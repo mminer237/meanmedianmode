@@ -2,6 +2,8 @@
 layout: default
 description: What is an "average"? What's the difference between a mean, a median, and a mode? Confused? Find out here with our original calculator and visualization tool!
 scripts:
+  - https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js
+  - https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2/dist/chartjs-plugin-annotation.min.js
   - /js/main.js
 ---
 
@@ -39,11 +41,20 @@ scripts:
 			</div>
 		</div>
 	</div>
-	<noscript>Sorry, this visualizer requires JavaScript enabled to function properly. You can still see text definitions at these links, however:
-		<ul>
-			<li><a href="/mean">Mean</a></li>
-			<li><a href="/median">Median</a></li>
-			<li><a href="/mode">Mode</a></li>
-		</ul>
-	</noscript>
 </section>
+<section>
+	<div>
+		<h2>Chart</h2>
+		<canvas id="chart"></canvas>
+	</div>
+</section>
+<noscript>
+	<section>
+		<p>Sorry, this visualizer requires JavaScript enabled to function properly. You can still see text definitions at these links, however:</p>
+			<ul>
+				<li><a href="/mean">Mean</a></li>
+				<li><a href="/median">Median</a></li>
+				<li><a href="/mode">Mode</a></li>
+			</ul>
+	</section>
+</noscript>

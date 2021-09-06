@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const dataBox = document.getElementById("data-box");
 const meanContainer = document.getElementById("mean");
@@ -14,8 +14,12 @@ function updateResults() {
 	for (let i = 0; i < numbers.length; i++) {
 		numbersList += `<div>${numbers[i]}</div>`;
 	}
-	fill(meanContainer, numbersList, mean(numbers));
-	fill(medianContainer, numbersList, median(numbers));
+	const meanResult = mean(numbers);
+	fill(meanContainer, numbersList, meanResult);
+
+	const medianResult = median(numbers);
+	fill(medianContainer, numbersList, medianResult);
+
 	let modeResult = mode(numbers);
 	if (isNaN(modeResult)) {
 		modePluralizer.style.display = "inline";
@@ -26,6 +30,11 @@ function updateResults() {
 	else
 		modePluralizer.style.display = "none";
 	fill(modeContainer, numbersList, modeResult.join(" & "), modeResult);
+
+	if (Chart)
+		drawChart(numbers, meanResult, medianResult, modeResult);
+	else
+		console.log("The Chart.js library failed to load.");
 }
 
 function round(number) {
@@ -184,4 +193,57 @@ function drawLine(resultContainer, x1, y1, x2, y2, bezier = false) {
 	else
 		ctx.lineTo(x2, y2);
 	ctx.stroke();
+}
+
+let chart;
+function drawChart(numbers, mean, median, mode) {
+	const darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+	if (chart)
+		chart.destroy();
+	const data = numbers.reduce((counts, x) => {
+		counts[x] = (counts[x] ?? 0) + 1;
+		return counts;
+	}, {});
+	if (!data[0] && !numbers.some(x => x < 0))
+		data[0] = 0;
+	const pairedData = [];
+	for (let key in data) {
+		pairedData.push([+key, +data[key]]);
+	}
+	pairedData.sort((a, b) => a[0] - b[0]);
+	chart = new Chart(document.getElementById("chart").getContext('2d'), {
+		type: 'line',
+		data: {
+			datasets: [{
+				data: pairedData,
+				backgroundColor: darkMode ? getComputedStyle(document.body).getPropertyValue('--primary-color') : getComputedStyle(document.body).getPropertyValue('--darkish-primary-color')
+			}]
+		},
+		options: {
+			plugins: {
+				legend: {
+					display: false
+				},
+				tooltip: {
+					callbacks: {
+						title: (tooltip, data) => {
+							return `Number of ${tooltip[0].label}s`;
+						}
+					}
+				}
+			},
+			responsive: true,
+			scales: {
+				x: {
+					type: 'linear'
+				},
+				y: {
+					beginAtZero: true,
+					ticks: {
+						precision: 0
+					}
+				}
+			}
+		}
+	});
 }
