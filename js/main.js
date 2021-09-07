@@ -170,7 +170,7 @@ function drawLineToPoint(resultContainer, x, y) {
 }
 
 function drawLine(resultContainer, x1, y1, x2, y2, bezier = false) {
-	const color = "#7eeee9";
+	const color = getComputedStyle(document.body).getPropertyValue('--highlighted-color');
 	const lineWidth = 2;
 
 	const canvas = resultContainer.querySelector('canvas');
@@ -206,8 +206,6 @@ function drawChart(numbers, mean, median, mode) {
 		counts[x] = (counts[x] ?? 0) + 1;
 		return counts;
 	}, {});
-	if (!data[0] && !numbers.some(x => x < 0))
-		data[0] = 0;
 	const pairedData = [];
 	for (let key in data) {
 		pairedData.push([+key, +data[key]]);
@@ -226,12 +224,13 @@ function drawChart(numbers, mean, median, mode) {
 				content: "Mean",
 				enabled: true,
 				font: {
-					family: "'Lato', sans-serif"
+					family: "'Lato', sans-serif",
+					size: 14
 				},
 				rotation: 'auto'
 			},
 			borderColor: lineColor,
-			borderWidth: 2,
+			borderWidth: 4,
 			value: mean
 		},
 		{
@@ -243,12 +242,13 @@ function drawChart(numbers, mean, median, mode) {
 				content: "Median",
 				enabled: true,
 				font: {
-					family: "'Lato', sans-serif"
+					family: "'Lato', sans-serif",
+					size: 14
 				},
 				rotation: 'auto'
 			},
 			borderColor: lineColor,
-			borderWidth: 2,
+			borderWidth: 4,
 			value: median
 		}
 	];
@@ -262,22 +262,25 @@ function drawChart(numbers, mean, median, mode) {
 				content: "Mode",
 				enabled: true,
 				font: {
-					family: "'Lato', sans-serif"
+					family: "'Lato', sans-serif",
+					size: 14
 				},
 				rotation: 'auto'
 			},
 			borderColor: lineColor,
-			borderWidth: 2,
+			borderWidth: 3,
 			value: mode[i]
 		});
 	}
 
 	chart = new Chart(document.getElementById("chart").getContext('2d'), {
-		type: 'line',
+		type: 'scatter',
 		data: {
 			datasets: [{
 				data: pairedData,
-				backgroundColor: darkMode ? getComputedStyle(document.body).getPropertyValue('--primary-color') : getComputedStyle(document.body).getPropertyValue('--darkish-primary-color')
+				backgroundColor: darkMode ? getComputedStyle(document.body).getPropertyValue('--primary-color') : getComputedStyle(document.body).getPropertyValue('--darkish-primary-color'),
+				pointHoverRadius: 5,
+				pointRadius: 5,
 			}]
 		},
 		options: {
@@ -292,7 +295,8 @@ function drawChart(numbers, mean, median, mode) {
 					callbacks: {
 						title: (tooltip, data) => {
 							return `Number of ${tooltip[0].label}s`;
-						}
+						},
+						label: (tooltip, data) => tooltip.formattedValue
 					}
 				}
 			},
