@@ -198,8 +198,10 @@ function drawLine(resultContainer, x1, y1, x2, y2, bezier = false) {
 let chart;
 function drawChart(numbers, mean, median, mode) {
 	const darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 	if (chart)
 		chart.destroy();
+	
 	const data = numbers.reduce((counts, x) => {
 		counts[x] = (counts[x] ?? 0) + 1;
 		return counts;
@@ -211,6 +213,65 @@ function drawChart(numbers, mean, median, mode) {
 		pairedData.push([+key, +data[key]]);
 	}
 	pairedData.sort((a, b) => a[0] - b[0]);
+
+	const lineColor = getComputedStyle(document.body).getPropertyValue('--highlighted-color');
+	const textColor = getComputedStyle(document.body).getPropertyValue('--text-color');
+	const annotations = [
+		{
+			type: 'line',
+			scaleID: 'x',
+			label: {
+				backgroundColor: lineColor,
+				color: textColor,
+				content: "Mean",
+				enabled: true,
+				font: {
+					family: "'Lato', sans-serif"
+				},
+				rotation: 'auto'
+			},
+			borderColor: lineColor,
+			borderWidth: 2,
+			value: mean
+		},
+		{
+			type: 'line',
+			scaleID: 'x',
+			label: {
+				backgroundColor: lineColor,
+				color: textColor,
+				content: "Median",
+				enabled: true,
+				font: {
+					family: "'Lato', sans-serif"
+				},
+				rotation: 'auto'
+			},
+			borderColor: lineColor,
+			borderWidth: 2,
+			value: median
+		}
+	];
+	for (let i = 0; i < mode.length; i++) {
+		annotations.push({
+			type: 'line',
+			scaleID: 'x',
+			label: {
+				backgroundColor: lineColor,
+				color: textColor,
+				content: "Mode",
+				enabled: true,
+				font: {
+					family: "'Lato', sans-serif"
+				},
+				rotation: 'auto'
+			},
+			borderColor: lineColor,
+			borderWidth: 2,
+			value: mode[i]
+		});
+	}
+
 	chart = new Chart(document.getElementById("chart").getContext('2d'), {
 		type: 'line',
 		data: {
@@ -221,6 +282,9 @@ function drawChart(numbers, mean, median, mode) {
 		},
 		options: {
 			plugins: {
+				annotation: {
+					annotations: annotations
+				},
 				legend: {
 					display: false
 				},
