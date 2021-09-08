@@ -214,52 +214,29 @@ function drawChart(numbers, mean, median, mode) {
 
 	const lineColor = getComputedStyle(document.body).getPropertyValue('--highlighted-color');
 	const textColor = getComputedStyle(document.body).getPropertyValue('--text-color');
-	const annotations = [
-		{
-			type: 'line',
-			scaleID: 'x',
-			label: {
-				backgroundColor: lineColor,
-				color: textColor,
-				content: "Mean",
-				enabled: true,
-				font: {
-					family: "'Lato', sans-serif",
-					size: 14
-				},
-				rotation: 'auto'
-			},
-			borderColor: lineColor,
-			borderWidth: 4,
-			value: mean
-		},
-		{
-			type: 'line',
-			scaleID: 'x',
-			label: {
-				backgroundColor: lineColor,
-				color: textColor,
-				content: "Median",
-				enabled: true,
-				font: {
-					family: "'Lato', sans-serif",
-					size: 14
-				},
-				rotation: 'auto'
-			},
-			borderColor: lineColor,
-			borderWidth: 4,
-			value: median
-		}
-	];
-	for (let i = 0; i < mode.length; i++) {
+
+	let results = { [mean]: "Mean" };
+
+	if (results[median])
+		results[median] += " & Median";
+	else
+		results[median] = "Median";
+
+	for (let i = 0; i < mode.length; i++)
+		if (results[mode[i]])
+			results[mode[i]] += " & Mode";
+		else
+			results[mode[i]] = "Mode";
+
+	const annotations = [];
+	for (let x in results)
 		annotations.push({
 			type: 'line',
 			scaleID: 'x',
 			label: {
 				backgroundColor: lineColor,
 				color: textColor,
-				content: "Mode",
+				content: results[x],
 				enabled: true,
 				font: {
 					family: "'Lato', sans-serif",
@@ -269,9 +246,8 @@ function drawChart(numbers, mean, median, mode) {
 			},
 			borderColor: lineColor,
 			borderWidth: 3,
-			value: mode[i]
+			value: +x
 		});
-	}
 
 	chart = new Chart(document.getElementById("chart").getContext('2d'), {
 		type: 'scatter',
