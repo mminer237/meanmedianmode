@@ -8,6 +8,10 @@ const modePluralizer = document.getElementById("mode-pluralizer");
 dataBox.addEventListener("input", updateResults);
 window.addEventListener("load", updateResults);
 
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("input"))
+	dataBox.value = urlParams.get("input");
+
 function updateResults() {
 	const numbers = dataBox.value.split(/[\s,]+/).map(x => x.trim()).filter(x => x.length > 0 && !isNaN(x)).map(x => x * 1).sort((a, b) => a - b);
 	let numbersList = "";
