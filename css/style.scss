@@ -68,6 +68,12 @@ h2, summary {
 	font-weight: bold;
 	margin: 0 0 15px 0;
 }
+a#input-link {
+	content: url(/assets/link-variant.svg);
+	float: right;
+	margin-top: 4px;
+	margin-right: 4px;
+}
 textarea {
 	background-color: var(--input-background-color);
 	color: var(--input-color);
@@ -160,5 +166,8 @@ footer {
 	}
 	a:hover {
 		color: #aef6ff
+	}
+	a#input-link {
+		content: url(/assets/link-variant-white.svg);
 	}
 }

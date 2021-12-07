@@ -1,5 +1,6 @@
 "use strict";
 
+const inputLink = document.getElementById("input-link");
 const dataBox = document.getElementById("data-box");
 const meanContainer = document.getElementById("mean");
 const medianContainer = document.getElementById("median");
@@ -18,6 +19,9 @@ function updateResults() {
 	for (let i = 0; i < numbers.length; i++) {
 		numbersList += `<div>${numbers[i]}</div>`;
 	}
+
+	inputLink.href = `/?input=${numbers.join(",")}`;
+
 	const meanResult = mean(numbers);
 	fill(meanContainer, numbersList, meanResult);
 
