@@ -42,6 +42,16 @@ function updateResults() {
 			return +x;
 		})
 		.sort((a, b) => a - b);
+
+	if (numbers.length === 0) {
+		document.querySelectorAll(".list").forEach(x => x.innerText = "");
+		document.querySelectorAll(".answer").forEach(x => x.innerText = "");
+		document.querySelectorAll('.comparison-container canvas').forEach(x => resetCanvas(x));
+		if (chart)
+			chart.destroy();
+		return;
+	}
+	
 	let numbersList = "";
 	for (let i = 0; i < numbers.length; i++) {
 		numbersList += `<div${type !== "number" ? ` data-value="${numbers[i]}"` : ""}>${formatItem(numbers[i])}</div>`;
