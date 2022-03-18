@@ -12,15 +12,42 @@ window.addEventListener("load", updateResults);
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("input"))
 	dataBox.value = urlParams.get("input");
+let type = "number";
+if (urlParams.has("type"))
+	type = urlParams.get("type");
+
+const timeFormatter = new Intl.DateTimeFormat([], { hour: 'numeric', minute:'numeric' });
+
+function formatItem(x) {
+	switch (type) {
+		case "time":
+			return timeFormatter.format(new Date(+x));
+		case "number":
+		default:
+			return +x;
+	}
+}
 
 function updateResults() {
-	const numbers = dataBox.value.split(/[\s,]+/).map(x => x.trim()).filter(x => x.length > 0 && !isNaN(x)).map(x => x * 1).sort((a, b) => a - b);
+	const numbers = dataBox.value
+		.split(/[\s,]+/)
+		.map(x => x.trim())
+		.filter(x => x.length > 0 && !isNaN(+x) && (type !== "time" || +x > 1000000000))
+		.map(x => {
+			if (type === "time") {
+				if (x < 2000000000)
+					x *= 1000;
+				x = Math.round(x / 60000) * 60000;
+			}
+			return +x;
+		})
+		.sort((a, b) => a - b);
 	let numbersList = "";
 	for (let i = 0; i < numbers.length; i++) {
-		numbersList += `<div>${numbers[i]}</div>`;
+		numbersList += `<div${type !== "number" ? ` data-value="${numbers[i]}"` : ""}>${formatItem(numbers[i])}</div>`;
 	}
 
-	inputLink.href = `/?input=${numbers.join(",")}`;
+	inputLink.href = `/?${type !== "number" ? `type=${type}&` : ""}input=${numbers.join(",")}`;
 
 	const meanResult = mean(numbers);
 	fill(meanContainer, numbersList, meanResult);
@@ -32,7 +59,16 @@ function updateResults() {
 	if (isNaN(modeResult)) {
 		modePluralizer.style.display = "inline";
 		for (let i = 0; i < modeResult.length; i++) {
-			modeResult[i] = round(modeResult[i]);
+			switch (type) {
+				case "number":
+					modeResult[i] = round(modeResult[i]);
+					break;
+				case "time":
+					modeResult[i] = formatItem(modeResult[i]);
+					break;
+				default:
+					break;
+			}
 		}
 	}
 	else
@@ -55,8 +91,12 @@ function round(number) {
 
 function fill(resultContainer, numbersList, result, rawResult = result) {
 	resultContainer.querySelector(".list").innerHTML = numbersList;
-	if (!isNaN(result))
-		resultContainer.querySelector(".answer").innerText = round(result);
+	if (!isNaN(result)) {
+		if (type === "number")
+			resultContainer.querySelector(".answer").innerText = round(result);
+		else
+			resultContainer.querySelector(".answer").innerText = formatItem(result);
+	}
 	else
 		resultContainer.querySelector(".answer").innerText = result;
 	
@@ -95,7 +135,7 @@ function mode(numbers) {
 		else if (dict[i] == most) {
 			mostIndexes.push(i);
 		}
-	};
+	}
 	return mostIndexes;
 }
 
@@ -111,7 +151,7 @@ function visualize(resultContainer, results) {
 		let exact = false;
 		let position = -1;
 		for (let listIndex = 0; listIndex < listElements.length; listIndex++) {
-			const listNumber = listElements[listIndex].innerText;
+			const listNumber = type === "time" ? listElements[listIndex].dataset.value : listElements[listIndex].innerText;
 			if (result == listNumber) {
 				exact = true;
 				highlight(listElements[listIndex], resultContainer);
@@ -286,7 +326,14 @@ function drawChart(numbers, mean, median, mode) {
 			},
 			responsive: true,
 			scales: {
-				x: {
+				x: type === "time" ? {
+					type: 'time',
+					min: Math.floor(pairedData[0][0] / 3600000) * 3600000,
+					time: {
+						stepSize: 60,
+						unit: 'minute'
+					}
+				} : {
 					type: 'linear'
 				},
 				y: {
