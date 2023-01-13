@@ -17,6 +17,7 @@
 	position: relative;
 }
 body {
+	accent-color: var(--darkish-primary-color);
 	background-color: var(--background-color);
 	display: flex;
 	flex-direction: column;
