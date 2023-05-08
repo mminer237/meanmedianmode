@@ -5,6 +5,7 @@
 const inputLink = document.getElementById("input-link");
 const dataBox = document.getElementById("data-box");
 const meanContainer = document.getElementById("mean");
+const meanMath = document.getElementById("mean-math");
 const medianContainer = document.getElementById("median");
 const modeContainer = document.getElementById("mode");
 const modePluralizer = document.getElementById("mode-pluralizer");
@@ -48,6 +49,7 @@ function updateResults() {
 	if (numbers.length === 0) {
 		document.querySelectorAll(".list").forEach(x => x.innerText = "");
 		document.querySelectorAll(".answer").forEach(x => x.innerText = "");
+		meanMath.innerText = "";
 		document.querySelectorAll('.comparison-container canvas').forEach(x => resetCanvas(x));
 		if (chart)
 			chart.destroy();
@@ -61,8 +63,21 @@ function updateResults() {
 
 	inputLink.href = `/?${type !== "number" ? `type=${type}&` : ""}input=${numbers.join(",")}`;
 
+	const numbersSum = numbers.reduce((a, b) => a + b, 0);
 	const meanResult = mean(numbers);
 	fill(meanContainer, numbersList, meanResult);
+	meanMath.innerHTML = `<math>
+			<mo title="Sum">&sum;</mo>
+			<mo>=</mo>
+			<mn>${numbersSum}</mn>
+		</math>
+		<math>
+			<mn>${numbersSum}</mn>
+			<mo>÷</mo>
+			<mn>${numbers.length}</mn>
+			<mo>=</mo>
+			<mn>${round(meanResult)}</mn>
+		</math>`;
 
 	const medianResult = median(numbers);
 	fill(medianContainer, numbersList, medianResult);

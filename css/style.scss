@@ -101,6 +101,14 @@ a:hover {
 		border-left: var(--background-color) 2px solid;
 	}
 }
+#mean-math {
+	border-top: var(--background-color) 2px solid;
+	overflow: hidden;
+	text-align: left;
+	math:nth-child(2) {
+		margin-left: clamp(0px, 5ex, calc(100% - 150px));
+	}
+}
 #mode-pluralizer {
 	display: none;
 }
@@ -140,6 +148,7 @@ a:hover {
 	margin: 25px 8px auto;
 }
 math {
+	display: block;
 	font-size: 170%;
 }
 mfrac {
