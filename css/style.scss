@@ -109,6 +109,9 @@ a:hover {
 		margin-left: clamp(0px, 5ex, calc(100% - 150px));
 	}
 }
+mn, mo {
+	display: inline-block;
+}
 #mode-pluralizer {
 	display: none;
 }
