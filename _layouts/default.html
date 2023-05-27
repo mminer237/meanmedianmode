@@ -29,6 +29,7 @@
 		<title>{% if page.url == "/" %}{{ site.title | xml_escape }}{% else %}{{ page.title | xml_escape }} – {{ site.title | xml_escape }}{% endif %}</title>
 		<meta name="description" content="{% if page.description %}{{ page.description | xml_escape }}{% else %}{{ page.excerpt | xml_escape }}{% endif %}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="canonical" href="{{ page.url | absolute_url }}">
 		<link rel="stylesheet" href="/css/style.css">
 		{% for font in site.googleFonts %}
 		<link href="https://fonts.googleapis.com/css?family={{ font }}&display=swap" rel="stylesheet">
