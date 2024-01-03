@@ -329,7 +329,7 @@ function drawChart(numbers, mean, median, mode) {
 		data: {
 			datasets: [{
 				data: pairedData,
-				backgroundColor: darkMode ? getComputedStyle(document.body).getPropertyValue('--primary-color') : getComputedStyle(document.body).getPropertyValue('--darkish-primary-color'),
+				backgroundColor: darkMode ? getComputedStyle(document.body).getPropertyValue('--primary-color') : getComputedStyle(document.body).getPropertyValue('--dark-primary-color'),
 				pointHoverRadius: 5,
 				pointRadius: 5,
 			}]

@@ -1,0 +1,91 @@
+a#input-link {
+    content: url(assets/link-variant.svg);
+    float: right;
+    margin-top: 4px;
+    margin-right: 4px
+}
+
+textarea {
+    background-color: var(--input-background-color);
+    color: var(--input-color);
+    font-size: 18px;
+    padding: 3px;
+    width: calc(100% - 6px)
+}
+#mean-math {
+    border-top: var(--background-color) 2px solid;
+    overflow: hidden;
+    text-align: left
+}
+
+#mean-math math:nth-child(2) {
+    margin-left: clamp(0px, 5ex, 100% - 150px)
+}
+
+mn,
+mo {
+    display: inline-block
+}
+
+#mode-pluralizer {
+    display: none
+}
+
+.about-link {
+    position: absolute;
+    font-size: 60%;
+    margin: 3px 0 0 4px
+}
+
+.result-container {
+    display: flex;
+    width: 100%
+}
+
+.result-container canvas {
+    position: absolute;
+    height: 100%;
+    width: 100%
+}
+
+.result-container>div {
+    flex: 1 1 0
+}
+
+.list {
+    font-size: 135%;
+    position: unset
+}
+
+.list div {
+    margin: 0 8px;
+    max-width: 110px;
+    overflow: hidden;
+    padding: 1px;
+    text-overflow: ellipsis
+}
+
+.highlighted,
+.answer {
+    background-color: var(--highlighted-color)
+}
+
+.answer {
+    font-size: 200%;
+    margin: 25px 8px auto
+}
+
+math {
+    display: block;
+    font-size: 170%
+}
+
+mfrac {
+    text-align: center
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 15px
+}
